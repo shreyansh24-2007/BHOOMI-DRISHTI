@@ -1,47 +1,128 @@
-# BHOOMI-DRISHTI (भूमि-दृष्टि)
+# 🛰️ BHOOMI-DRISHTI
 
-**Statutory Land Acquisition Intelligence & Delay Risk Monitoring Platform**  
-*Smart India Hackathon 2026 (Problem Statement: SIH26017) — Ministry of Road Transport & Highways (MoRTH) / National Highways Authority of India (NHAI)*
-
----
-
-## Overview
-
-**BHOOMI-DRISHTI** is an AI-driven decision-support and predictive analytics platform designed to detect, diagnose, and mitigate land acquisition delays across national highway corridors under the **National Highways Act, 1956** (Sections **3A**, **3D**, **3G**, and **3H**) and the **RFCTLARR Act, 2013**.
-
-By integrating statutory provenance records from the **MoRTH BhoomiRashi portal**, point-in-time historical feature reconstruction, supervised machine learning inference, and institutional model governance, the platform enables Competent Authorities for Land Acquisition (CALA), Nodal Officers, and Project Auditors to identify and resolve bottlenecks before physical construction is stalled.
+> **Predictive Analytics System for Early Detection of Land Acquisition Delays**  
+> *Smart India Hackathon 2026 (Problem Statement: SIH26017) — Government of India*
 
 ---
 
-## Key Features
+## 📌 Overview
 
-- **Supervised ML Delay Risk Engine (`BHOOMI-DRISHTI-ML-V1.0`)**: Computes acquisition delay probabilities (0–100%), risk tiers (`HIGH`, `MEDIUM`, `LOW`), and schedule variance (in months) across 31 national highway corridors using a Class-Weighted Random Forest classifier (`ROC-AUC: 0.883`, `Accuracy: 88.0%`).
-- **Shadow Model Governance (`BHOOMI-DRISHTI-ML-V2.0-SHADOW`)**: 11-tab governance workspace evaluating candidate longitudinal models in strict non-operational isolation with PSI/KS drift monitoring, McNemar's test, paired bootstrap confidence intervals, and a Pre-3A statutory circuit breaker.
-- **Statutory Data Hub & Evidence Workspace**: Connects to official MoRTH BhoomiRashi endpoints, performs SHA-256 change detection, classifies corridors into 5 statutory evidence states (`COMPLETE`, `PRE_3A`, `PARTIAL`, `OUT_OF_BOUNDS`, `MISSING_AUTHORITATIVE_EVIDENCE`), and provides a 6-stage atomic CSV ingestion pipeline with formula injection defanging and Excel-compatible UTF-8 exports.
-- **"What-If" Policy Simulator**: Counterfactual simulation engine allowing officers to test interventions—such as accelerating compensation disbursement, resolving Section 3G arbitration, vacating court stays, or expediting forest clearances—and quantify risk reduction and months saved.
-- **National GIS Risk Command Center**: Interactive OpenStreetMap & Leaflet geospatial dashboard plotting corridor alignments, package markers, and district-level bottlenecks across India.
-- **Institutional RBAC & Audit Trail**: Role-based access control (`NODAL_OFFICER`, `AUDITOR`, `VIEWER`) backed by Google Firebase Authentication, SIH Evaluator Demo Mode, and an immutable cryptographic audit log.
+**BHOOMI-DRISHTI** is an AI-driven monitoring and decision-support platform designed to forecast, diagnose, and mitigate land acquisition delays across national infrastructure projects.
+
+By continuously analyzing statutory milestones under the National Highways Act 1956 and RFCTLARR Act 2013 (Section 3A, 3D, 3G, 3H notifications, compensation disbursements, judicial references, and environmental clearances), the platform detects bottlenecks months before physical construction is impacted.
 
 ---
 
-## Tech Stack
+## ✨ Key Features
 
-- **Frontend**: React 19, TypeScript, Tailwind CSS 4, Recharts, Leaflet (OpenStreetMap), Lucide Icons
-- **Backend**: Node.js, Express, TypeScript (`tsx` / `esbuild`)
-- **Database**: SQLite (`node:sqlite` in WAL mode)
-- **Machine Learning**: Python (`scikit-learn`, `joblib`) + TypeScript ML Prediction Bridge & Shadow Runner
-- **Authentication & Security**: Firebase Authentication (`jose` JWKS verification), Server-Side RBAC, Rate Limiting, CSP Headers
+- **🎯 Predictive Risk Scoring Engine**: Calculates acquisition delay probabilities (0–100%) and projected schedule variance (in months) using multi-factor ML scoring calibrated against historical statutory timelines.
+- **🔍 Explainable AI & Bottleneck Attribution**: Breaks down exact root causes driving project risk (e.g., judicial stays, compensation disbursement backlogs, mutation records, and pending Stage-1/Stage-2 forest clearances).
+- **🧪 "What-If" Policy Simulator**: Interactive counterfactual simulator enabling authorities to test intervention outcomes—such as special disbursement camps or vacating judicial stays—to quantify risk reduction and time saved prior to deployment.
+- **🗺️ Interactive GIS Risk Map**: Geospatial corridor view displaying project locations, risk tiers (High / Medium / Low), stage progression, and district-level breakdown across India.
+- **🔄 DataHub Ingestion & Change Detection**: Automated ingestion pipeline supporting authentic BhoomiRashi and LACRRIS data sources, with cryptographic hashing (`SHA-256`) for immutable audit trails and real-time alerts.
+- **📄 Executive Reports & Briefings**: Automated statutory briefing generator producing one-click ministerial digests, district review dossiers, and printable PDF inspection reports.
 
 ---
 
-## Quick Start
+## 🏗️ Architecture & Tech Stack
 
+- **Frontend**: React 18, TypeScript, Tailwind CSS, Lucide Icons, Motion animations
+- **Charts & Data Visuals**: Recharts, D3.js
+- **Backend API Server**: Node.js, Express, TypeScript (`tsx` in dev, `esbuild` for production CommonJS bundle)
+- **Database**: SQLite (high-performance embedded storage with WAL mode and parameterized prepared statements)
+- **Security**: Strict input sanitation, parameterized SQL queries, zero client-side credentials, and standard HTTP security headers
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ or 20+
+- npm 9+
+
+### 1. Clone & Install
 ```bash
-# 1. Install dependencies
+git clone https://github.com/your-username/bhoomi-drishti.git
+cd bhoomi-drishti
 npm install
+```
 
-# 2. Copy environment configuration
+### 2. Environment Setup
+Copy the example environment configuration:
+```bash
 cp .env.example .env
+```
+*(No external secrets required for standard offline SQLite operation)*
 
-# 3. Start development server (http://localhost:3000)
+### 3. Run Development Server
+```bash
 npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## 🧪 Testing & Verification
+
+Run the built-in comprehensive verification and quality test suite:
+```bash
+npm test
+```
+The test suite validates:
+- Data integrity & authentic BhoomiRashi source verification (Project 60940)
+- Single source of truth consistency (total project counts and risk aggregations)
+- Deterministic cryptographic hashing & change detection
+- ML delay prediction & variance calculation boundaries
+- "What-If" counterfactual engine immutability and safe clamping
+- SQL injection prevention and API parameter sanitization
+
+To run static type-checking:
+```bash
+npm run lint
+```
+
+---
+
+## 📦 Production Build
+
+Build both the client-side SPA assets and the server bundle:
+```bash
+npm run build
+```
+
+Start the production server:
+```bash
+npm start
+```
+
+---
+
+## 📂 Project Structure
+
+```
+├── data/                     # SQLite database files and persistent storage
+├── scripts/
+│   └── runTests.ts          # Comprehensive automated quality test suite
+├── src/
+│   ├── components/          # React UI components (Dashboard, Map, Simulator, Reports)
+│   ├── server/              # Server-side business logic & database
+│   │   ├── datahub/         # Ingestion adapters & change detection engine
+│   │   ├── database.ts      # Authoritative SQLite storage & query services
+│   │   ├── mlModel.ts       # Delay prediction & feature attribution algorithms
+│   │   └── predictionService.ts # "What-If" simulation logic
+│   ├── types.ts             # TypeScript interfaces and domain schemas
+│   ├── App.tsx              # Main application shell
+│   └── main.tsx             # Application bootstrap
+├── index.html               # Entry HTML template
+├── metadata.json            # Application platform metadata
+├── package.json             # NPM dependencies & scripts
+├── server.ts                # Express server entry point & API routes
+└── vite.config.ts           # Vite build configuration
+```
+
+---
+
+## 📜 License
+
+This project is developed as part of **Smart India Hackathon 2026** (Problem Statement SIH26017).  
+Distributed under the **MIT License**.

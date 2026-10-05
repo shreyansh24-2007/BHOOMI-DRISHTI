@@ -1,0 +1,7 @@
+# BHOOMI-DRISHTI ML Inference Runtime Dependencies
+# Pinned for Python 3.10+ execution of BHOOMI-DRISHTI-ML-V1.0 and V2.0-SHADOW
+joblib==1.4.2
+scikit-learn==1.4.2
+pandas==2.2.2
+numpy==1.26.4
+scipy==1.13.0

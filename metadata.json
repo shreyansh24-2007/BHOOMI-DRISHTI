@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix Remix Remix Remix Land Acquisition Delay Analytics",
+  "description": "Predictive Analytics System for Early Detection of Land Acquisition Delays (SIH26017)",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
